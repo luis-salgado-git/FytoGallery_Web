@@ -1,41 +1,157 @@
-/* Lightbox (Visor a pantalla completa) */
+/* RESET BÁSICO (Para quitar márgenes feos del navegador) */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url("assest/fondo.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #111; /* Negro casi puro */
+    color: #eee;            /* Blanco roto (menos agresivo a la vista) */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Tipografía limpia */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el footer baje si hay pocas fotos */
+    
+}
+
+/* --- BARRA SUPERIOR --- */
+.top-bar {
+    position: sticky; /* Se queda pegada arriba al hacer scroll */
+    top: 0;
+    z-index: 100;     /* Por encima de las fotos */
+    background-color: rgba(17, 17, 17, 0.95); /* Un poco transparente */
+    backdrop-filter: blur(5px); /* Efecto cristal borroso (muy pro) */
+    
+    display: flex;
+    justify-content: space-between; /* Empuja elementos a los extremos */
+    align-items: center;            /* Centra verticalmente */
+    
+    padding: 5px 40px;
+    border-bottom: 1px solid #222; /* Línea sutil separadora */
+}
+
+.logo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 2px; /* Espaciado elegante */
+    text-transform: uppercase;
+}
+
+.nav-links a {
+    color: #bbb;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #fff; /* Se ilumina al pasar el ratón */
+}
+
+/* --- ZONA CENTRAL --- */
+.main-content {
+
+    flex: 1; /* Ocupa todo el espacio sobrante */
+    width: 100%;
+}
+
+/* GALERÍA MASONRY */
+.gallery-container {
+    column-count: 3;
+    column-gap: 15px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+@media (max-width: 768px) {
+    .gallery-container {
+        column-count: 1; /* En móvil, una sola columna */
+    }
+}
+
+.photo-item {
+    margin-bottom: 15px;
+    break-inside: avoid;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.photo-item:hover {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+}
+
+.photo-item img {
+    width: 100%;
+    display: block;
+    border-radius: 4px;
+}
+
+/* LIGHTBOX */
 .lightbox {
     position: fixed;
-    z-index: 1000;
-    top: 0;
+    top: 0; 
     left: 0;
-    width: 100%;
+    width: 100%; 
     height: 100%;
-    background: rgba(0, 0, 0, 0.95); /* Negro casi puro, muy elegante */
+    background: rgba(0,0,0,0.95);
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
     opacity: 1;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s;
 }
 
 .lightbox.hidden {
     opacity: 0;
-    pointer-events: none; /* Para que no moleste cuando está invisible */
+    pointer-events: none;
 }
 
 .lightbox img {
     max-width: 90%;
     max-height: 90vh;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    border: 1px solid #333;
+    box-shadow: 0 0 20px black;
 }
 
 #close-btn {
     position: absolute;
-    top: 20px;
+    top: 20px; 
     right: 30px;
-    color: white;
     font-size: 40px;
+    color: white;
     cursor: pointer;
-    transition: color 0.3s;
+}
+/* --- BARRA INFERIOR --- */
+.bottom-bar {
+    background-color: #0a0a0a;
+    padding: 10px;
+    margin-top: 50px;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #222;
+    font-size: 0.8rem;
+    color: #666;
 }
 
-#close-btn:hover {
-    color: #ff4444; /* Un toque de color de interfaz, o gris más claro */
+.bottom-bar a {
+    color: #666;
+    text-decoration: none;
+}
+.bottom-bar a:hover { text-decoration: underline; }
+
+/* AJUSTE PARA MÓVIL */
+@media (max-width: 768px) {
+    .top-bar { padding: 15px 20px; }
+    .nav-links { display: none; } /* Ocultar menú en móvil por ahora */
+    .bottom-bar { flex-direction: column; gap: 10px; text-align: center; }
 }

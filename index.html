@@ -3,23 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nombre del Fotógrafo</title>
+    <title>Portafolio Fotografía</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1>NOMBRE APELLIDO</h1>
-        <p>Fotografía & Dirección de Arte</p>
+    <header class="top-bar">
+        <div class="logo">
+            El Arte de Detener el Tiempo  </div>
+        <nav class="nav-links">
+            <a href="galeria.html" target="_blank">Galería</a>
+            <a href="#contacto">Sobre mí</a>
+        </nav>
     </header>
 
-    <div id="gallery-grid" class="gallery-container"></div>
+    <main class="main-content">
+        <div></div>
+    </main>
 
+    <footer class="bottom-bar">
+        <div class="copyright">
+            &copy; Rodolfo Dueñas Sosa
+        </div>
+        <div class="footer-links">
+            <a href="mailto:email@ejemplo.com">El Arte de Detener el Tiempo</a>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="main.js"></script>
+    
     <div id="lightbox" class="lightbox hidden">
         <span id="close-btn">&times;</span>
         <img id="lightbox-img" src="" alt="">
     </div>
 
-    <script type="module" src="main.js"></script>
 </body>
 </html>

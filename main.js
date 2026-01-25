@@ -1,52 +1,51 @@
-import { portfolioData } from './data.js';
-
+// Referencias al HTML
 const grid = document.getElementById('gallery-grid');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const closeBtn = document.getElementById('close-btn');
 
-// 1. RENDERIZADO DEL GRID
-portfolioData.forEach(foto => {
-    // Crear contenedor de la foto
-    const item = document.createElement('div');
-    item.classList.add('photo-item');
+// 1. RENDERIZADO (Pintar las fotos)
+// Comprobamos si hay datos para evitar errores
+if (typeof portfolioData !== 'undefined') {
+    portfolioData.forEach(foto => {
+        const item = document.createElement('div');
+        item.classList.add('photo-item');
 
-    // Crear la imagen
-    const img = document.createElement('img');
-    img.src = foto.src;
-    img.alt = foto.alt;
-    img.loading = "lazy"; // CRÍTICO: Carga diferida para rendimiento
+        const img = document.createElement('img');
+        img.src = foto.src;
+        img.alt = foto.alt;
+        img.loading = "lazy"; 
 
-    // Evento para abrir Lightbox
-    item.addEventListener('click', () => {
-        openLightbox(foto.src);
+        // Al hacer clic, abrimos el visor
+        item.addEventListener('click', () => {
+            openLightbox(foto.src);
+        });
+
+        item.appendChild(img);
+        grid.appendChild(item);
     });
+} else {
+    console.error("No se encontró portfolioData. Revisa que data.js esté cargado antes.");
+}
 
-    // Ensamblar
-    item.appendChild(img);
-    grid.appendChild(item);
-});
-
-// 2. LÓGICA DEL LIGHTBOX (VISOR)
+// 2. FUNCIONES DEL VISOR
 function openLightbox(src) {
     lightboxImg.src = src;
     lightbox.classList.remove('hidden');
-    document.body.style.overflow = 'hidden'; // Bloquea el scroll del fondo
+    document.body.style.overflow = 'hidden'; // Bloquea scroll
 }
 
 function closeLightbox() {
     lightbox.classList.add('hidden');
-    lightboxImg.src = ''; // Limpiar src
-    document.body.style.overflow = 'auto'; // Reactiva el scroll
+    lightboxImg.src = '';
+    document.body.style.overflow = 'auto'; // Reactiva scroll
 }
 
-// Cerrar con botón, click fuera o tecla ESC
+// Cerrar eventos
 closeBtn.addEventListener('click', closeLightbox);
-
 lightbox.addEventListener('click', (e) => {
     if (e.target === lightbox) closeLightbox();
 });
-
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeLightbox();
 });
