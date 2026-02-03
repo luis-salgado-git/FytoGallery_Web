@@ -1,93 +1,70 @@
-// main.js - Lógica Principal
-
-// Referencias a los elementos del HTML
+// main.js - Versión Educativa
 const grid = document.getElementById('gallery-grid');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
+const exifContainer = document.getElementById('exif-data-container'); // Nuevo contenedor
 const closeBtn = document.getElementById('close-btn');
 
-// ==========================================
-// 1. LÓGICA DE LA GALERÍA (Solo si existe el grid)
-// ==========================================
-if (grid) {
-    // Comprobamos si la base de datos (data.js) cargó correctamente
-    if (typeof portfolioData !== 'undefined') {
+if (grid && typeof portfolioData !== 'undefined') {
+    portfolioData.forEach(foto => {
+        const item = document.createElement('div');
+        item.classList.add('photo-item');
         
-        portfolioData.forEach(foto => {
-            // Crear el contenedor de la foto (la tarjeta)
-            const item = document.createElement('div');
-            item.classList.add('photo-item');
+        const img = document.createElement('img');
+        img.src = foto.src;
+        img.alt = foto.alt;
+        img.loading = "lazy";
 
-            // Crear la imagen
-            const img = document.createElement('img');
-            img.src = foto.src;
-            img.alt = foto.alt;
-            img.loading = "lazy"; // Carga diferida para rendimiento
-
-            // --- LÓGICA DE CARGA SUAVE (Skeleton + Fade In) ---
-            // Esta función se ejecuta cuando la imagen termina de descargarse del internet
-            const imageLoaded = () => {
-                img.classList.add('loaded'); // Activa la opacidad 1 en CSS
-                item.style.animation = 'none'; // Detiene el parpadeo gris de carga
-            };
-
-            img.onload = imageLoaded;
-
-            // Verificación extra: Si la imagen ya estaba en caché (memoria), 
-            // el evento onload a veces no salta, así que forzamos la función.
-            if (img.complete) {
-                imageLoaded();
-            }
-            // --------------------------------------------------
-
-            // Evento click para abrir el Lightbox
-            item.addEventListener('click', () => {
-                if (lightbox) openLightbox(foto.src);
-            });
-
-            // Ensamblaje: Meter img dentro de item, y item dentro del grid
-            item.appendChild(img);
-            grid.appendChild(item);
+        img.onload = () => img.classList.add('loaded');
+        
+        item.addEventListener('click', () => {
+            openLightbox(foto); // Pasamos el OBJETO entero, no solo la src
         });
 
-    } else {
-        console.error("Error: No se encontró 'portfolioData'. Asegúrate de cargar data.js antes que main.js");
-    }
+        item.appendChild(img);
+        grid.appendChild(item);
+    });
 }
 
-// ==========================================
-// 2. LÓGICA DEL LIGHTBOX (Visor a pantalla completa)
-// ==========================================
-if (lightbox) {
-
-    // Función para ABRIR
-    function openLightbox(src) {
-        lightboxImg.src = src; // Pone la foto que has clicado
-        lightbox.classList.remove('hidden'); // Quita la invisibilidad
-        document.body.style.overflow = 'hidden'; // Bloquea el scroll de la página de fondo
-    }
-
-    // Función para CERRAR
-    function closeLightbox() {
-        lightbox.classList.add('hidden'); // Vuelve a ocultarlo
-        setTimeout(() => {
-            lightboxImg.src = ''; // Limpia la imagen para ahorrar memoria (tras la animación)
-        }, 300);
-        document.body.style.overflow = 'auto'; // Reactiva el scroll
-    }
-
-    // --- Eventos de Cierre ---
+function openLightbox(foto) {
+    if (!lightbox) return;
     
-    // 1. Clic en la "X"
-    closeBtn.addEventListener('click', closeLightbox);
+    lightboxImg.src = foto.src;
+    
+    // INYECTAR DATOS EXIF
+    // Si la foto tiene datos, los mostramos. Si no, ponemos "N/A"
+    const info = foto.exif || { camara: "-", lente: "-", iso: "-", f: "-" };
+    
+    // Renderizamos el HTML del panel EXIF dinámicamente
+    if(exifContainer) {
+        exifContainer.innerHTML = `
+            <div class="exif-panel">
+                <h3 class="exif-title">${foto.category || 'Fotografía'}</h3>
+                <div class="exif-data">
+                    <p>Cámara <span>${info.camara}</span></p>
+                    <p>Lente <span>${info.lente}</span></p>
+                    <p>ISO <span>${info.iso}</span></p>
+                    <p>Apertura <span>${info.f}</span></p>
+                    <p>Velocidad <span>${info.exp}</span></p>
+                </div>
+            </div>
+        `;
+    }
 
-    // 2. Clic en el fondo negro (fuera de la foto)
+    lightbox.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    lightbox.classList.add('hidden');
+    setTimeout(() => { lightboxImg.src = ''; }, 300);
+    document.body.style.overflow = 'auto';
+}
+
+if(closeBtn) closeBtn.addEventListener('click', closeLightbox);
+if(lightbox) {
     lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) closeLightbox();
-    });
-
-    // 3. Pulsar la tecla ESCAPE
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeLightbox();
+        if (e.target === lightbox || e.target.classList.contains('lightbox-content-wrapper')) closeLightbox();
     });
 }
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });

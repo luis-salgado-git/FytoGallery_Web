@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Galería de fotografía artística de Rodolfo Dueñas. Retratos, paisajes y fotografía urbana.">
     <title>Galería | Rodolfo Dueñas</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -10,9 +11,11 @@
 
     <header class="top-bar">
         <div class="logo">
-            <a href="index.html">RODOLFO DUEÑAS</a> </div>
+            <a href="index.html">RODOLFO DUEÑAS</a>
+        </div>
         <nav class="nav-links">
             <a href="index.html">Inicio</a>
+            <a href="galeria.html" class="active">Galería</a>
             <a href="sobre-mi.html">Sobre Mí</a>
         </nav>
     </header>
@@ -21,10 +24,17 @@
         <div id="gallery-grid" class="gallery-container"></div>
     </main>
 
-    <footer class="bottom-bar" id="contacto">
-        <div class="copyright">&copy; Rodolfo Dueñas Sosa</div>
+    <div id="lightbox" class="lightbox hidden">
+        <span id="close-btn"><i class="fas fa-times"></i> &times;</span> <div class="lightbox-content-wrapper">
+            <img id="lightbox-img" src="" alt="">
+            <div id="exif-data-container"></div>
+        </div>
+    </div>
+
+    <footer class="bottom-bar">
+        <div class="copyright">&copy; 2026 Rodolfo Dueñas Sosa</div>
         <div class="footer-links">
-            <a href="mailto:email@ejemplo.com">Contacto</a>
+            <a href="sobre-mi.html#contacto-anchor">Ir a Contacto</a>
         </div>
     </footer>
 

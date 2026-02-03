@@ -3,90 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conoce a Rodolfo Dueñas, fotógrafo especializado en capturar la esencia del tiempo a través de retratos y paisajes.">
     <title>Sobre Mí | Rodolfo Dueñas</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .about-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            display: grid;
-            grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
-            gap: 50px;
-            align-items: center;
-        }
-
-        .profile-photo img {
-            width: 100%;
-            height: auto;
-            border-radius: 2px;
-            filter: grayscale(100%); /* Blanco y negro para mantener el estilo */
-            transition: filter 0.5s;
-        }
-        
-        .profile-photo img:hover {
-            filter: grayscale(0%); /* Color al pasar el ratón */
-        }
-
-        .bio-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            font-weight: 100;
-            letter-spacing: 2px;
-        }
-
-        .bio-text p {
-            font-size: 1rem;
-            line-height: 1.8; /* Buena legibilidad */
-            color: #ccc;
-            margin-bottom: 20px;
-        }
-
-        .contact-list {
-            list-style: none;
-            margin-top: 30px;
-            border-top: 1px solid #333;
-            padding-top: 20px;
-        }
-        
-        .contact-list li { margin-bottom: 10px; color: #888; }
-        .contact-list a { color: white; text-decoration: none; border-bottom: 1px dotted #666; }
-
-        @media (max-width: 768px) {
-            .about-container { grid-template-columns: 1fr; } /* Columna única en móvil */
-            .bio-text h2 { font-size: 2rem; }
-        }
-    </style>
-</head>
+    </head>
 <body>
 
     <header class="top-bar">
         <div class="logo">
-            <a href="index.html" style="color:white; text-decoration:none;">RODOLFO DUEÑAS</a>
+            <a href="index.html">RODOLFO DUEÑAS</a>
         </div>
         <nav class="nav-links">
-            <a href="galeria.html">Galería</a>
             <a href="index.html">Inicio</a>
+            <a href="galeria.html">Galería</a>
+            <a href="sobre-mi.html" class="active">Sobre Mí</a>
         </nav>
     </header>
 
     <main class="main-content">
         <div class="about-container">
             <div class="profile-photo">
-                <img src="https://images.unsplash.com/photo-1554048612-387768052bf7?auto=format&fit=crop&w=800&q=80" alt="Retrato Rodolfo">
+                <img src="assets/rodolfo_retrato.png" alt="Retrato Rodolfo">
             </div>
 
             <div class="bio-text">
                 <h2>DETRÁS DE LA LENTE</h2>
                 <p>
-                    Hola, soy Rodolfo. Mi obsesión no es solo capturar imágenes, sino robar pequeños fragmentos de tiempo que de otro modo se perderían para siempre.
+                    Hola, soy Rodolfo. Me gustan las fotos, soy un poco tonto pero buena gente y fui comunista pero me cure dios me libre jaja.
                 </p>
                 <p>
-                    Con base en [Tu Ciudad], me especializo en fotografía de retrato y paisaje atmosférico. Mi trabajo busca la belleza en la oscuridad y la serenidad en el caos. No busco la foto perfecta, busco la foto que se siente real.
+                    Con base en Uruguay para demostrar que el tercer mundo puede triunfar. Un saludo
                 </p>
                 
-                <ul class="contact-list">
-                    <li>📍 Disponible para proyectos en España y Europa</li>
+                <ul class="contact-list" id="contacto-anchor">
+                    <li>📍 Disponible para proyectos</li>
                     <li>📧 <a href="mailto:email@ejemplo.com">contacto@rodolfoduenas.com</a></li>
                     <li>📸 <a href="#" target="_blank">@rodolfo_foto</a></li>
                 </ul>
@@ -96,7 +46,7 @@
 
     <footer class="bottom-bar">
         <div class="copyright">&copy; 2026 Rodolfo Dueñas</div>
-    </footer>
+        </footer>
 
 </body>
 </html>
