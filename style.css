@@ -1,157 +1,214 @@
-/* RESET BÁSICO (Para quitar márgenes feos del navegador) */
+/* =========================================
+   1. RESET Y BASE
+   ========================================= */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+html { scroll-behavior: smooth; }
+
 body {
-    background-image: url("assest/fondo.png");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-color: #111; /* Negro casi puro */
-    color: #eee;            /* Blanco roto (menos agresivo a la vista) */
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Tipografía limpia */
+    background-color: #111;
+    color: #eee;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Asegura que el footer baje si hay pocas fotos */
-    
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* --- BARRA SUPERIOR --- */
-.top-bar {
-    position: sticky; /* Se queda pegada arriba al hacer scroll */
-    top: 0;
-    z-index: 100;     /* Por encima de las fotos */
-    background-color: rgba(17, 17, 17, 0.95); /* Un poco transparente */
-    backdrop-filter: blur(5px); /* Efecto cristal borroso (muy pro) */
-    
-    display: flex;
-    justify-content: space-between; /* Empuja elementos a los extremos */
-    align-items: center;            /* Centra verticalmente */
-    
-    padding: 5px 40px;
-    border-bottom: 1px solid #222; /* Línea sutil separadora */
-}
-
-.logo {
-    font-size: 1.2rem;
-    font-weight: bold;
-    letter-spacing: 2px; /* Espaciado elegante */
-    text-transform: uppercase;
-}
-
-.nav-links a {
-    color: #bbb;
-    text-decoration: none;
-    margin-left: 25px;
-    font-size: 0.9rem;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-    color: #fff; /* Se ilumina al pasar el ratón */
-}
-
-/* --- ZONA CENTRAL --- */
-.main-content {
-
-    flex: 1; /* Ocupa todo el espacio sobrante */
-    width: 100%;
-}
-
-/* GALERÍA MASONRY */
-.gallery-container {
-    column-count: 3;
-    column-gap: 15px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-@media (max-width: 768px) {
-    .gallery-container {
-        column-count: 1; /* En móvil, una sola columna */
-    }
-}
-
-.photo-item {
-    margin-bottom: 15px;
-    break-inside: avoid;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.photo-item:hover {
-    transform: scale(1.02);
-    filter: brightness(1.1);
-}
-
-.photo-item img {
-    width: 100%;
-    display: block;
-    border-radius: 4px;
-}
-
-/* LIGHTBOX */
-.lightbox {
+/* =========================================
+   2. FONDO ANIMADO (KEN BURNS)
+   ========================================= */
+.background-container {
     position: fixed;
-    top: 0; 
-    left: 0;
-    width: 100%; 
-    height: 100%;
-    background: rgba(0,0,0,0.95);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 1;
-    transition: opacity 0.3s;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    background-color: #000;
 }
 
-.lightbox.hidden {
-    opacity: 0;
+.background-image {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.6; /* Transparencia base */
+    animation: kenBurns 25s infinite alternate ease-in-out;
+}
+
+@keyframes kenBurns {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.2); }
+}
+
+/* Capa oscura para mejorar legibilidad */
+.overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 90%);
+    z-index: -1;
     pointer-events: none;
 }
 
-.lightbox img {
-    max-width: 90%;
-    max-height: 90vh;
-    box-shadow: 0 0 20px black;
+/* =========================================
+   3. PORTADA: HÉROE Y MENÚ
+   ========================================= */
+.presentation-mode {
+    /* Centra verticalmente solo si hay espacio */
+    justify-content: flex-start; 
 }
 
-#close-btn {
-    position: absolute;
-    top: 20px; 
-    right: 30px;
-    font-size: 40px;
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh; /* Ocupa el 60% de la pantalla */
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+.hero-title {
+    font-size: 4.5rem;
+    font-weight: 100;
+    letter-spacing: 10px;
+    line-height: 1;
+    margin-bottom: 10px;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: #ccc;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+}
+
+/* MENÚ PRINCIPAL */
+.main-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.menu-link {
+    font-size: 1.1rem;
     color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    position: relative;
     cursor: pointer;
 }
-/* --- BARRA INFERIOR --- */
-.bottom-bar {
-    background-color: #0a0a0a;
-    padding: 10px;
-    margin-top: 50px;
-    
+
+.menu-link:hover {
+    letter-spacing: 6px; /* Efecto elástico */
+    text-shadow: 0 0 10px white;
+}
+
+.menu-link.small { font-size: 0.9rem; color: #bbb; }
+.menu-link.disabled { color: #555; pointer-events: none; }
+
+.coming-soon {
+    font-size: 0.6rem;
+    vertical-align: super;
+    color: #888;
+}
+
+/* =========================================
+   4. EL TRÍPTICO (CARTAS ESTÁTICAS)
+   ========================================= */
+.teaser-static {
+    height: 30vh; /* El 30% restante de la pantalla */
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid #222;
-    font-size: 0.8rem;
-    color: #666;
+    justify-content: center;
+    align-items: center; /* Centradas verticalmente en su zona */
+    gap: 25px;
+    padding-bottom: 40px;
 }
 
-.bottom-bar a {
-    color: #666;
+.teaser-card {
+    position: relative;
+    width: 130px;
+    height: 190px;
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
     text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
 }
-.bottom-bar a:hover { text-decoration: underline; }
 
-/* AJUSTE PARA MÓVIL */
+.teaser-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) brightness(0.6);
+    transform: scale(1.0);
+    transition: all 0.6s ease;
+}
+
+/* Efectos Hover */
+.teaser-card:hover {
+    transform: translateY(-15px); /* Levita */
+    border-color: rgba(255,255,255,0.6);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+    z-index: 20;
+}
+
+.teaser-card:hover img {
+    filter: grayscale(0%) brightness(1.1); /* Color! */
+    transform: scale(1.15); /* Zoom interno */
+}
+
+/* Texto flotante sobre la carta */
+.card-label {
+    position: absolute;
+    bottom: 10px; width: 100%;
+    text-align: center;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: white;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    text-shadow: 0 2px 4px black;
+}
+
+.teaser-card:hover .card-label {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   5. FOOTER
+   ========================================= */
+.simple-footer {
+    position: absolute;
+    bottom: 10px; width: 100%;
+    text-align: center;
+    font-size: 0.7rem;
+    color: #444;
+    letter-spacing: 1px;
+}
+
+/* =========================================
+   6. RESPONSIVE (MÓVIL)
+   ========================================= */
 @media (max-width: 768px) {
-    .top-bar { padding: 15px 20px; }
-    .nav-links { display: none; } /* Ocultar menú en móvil por ahora */
-    .bottom-bar { flex-direction: column; gap: 10px; text-align: center; }
+    .hero-title { font-size: 2.8rem; letter-spacing: 5px; }
+    
+    .teaser-static {
+        gap: 10px;
+        align-items: flex-end; /* En móvil, mejor abajo del todo */
+        padding-bottom: 60px;
+    }
+    
+    .teaser-card {
+        width: 90px; height: 130px; /* Cartas más pequeñas */
+    }
 }
