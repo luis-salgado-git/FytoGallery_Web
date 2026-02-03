@@ -6,17 +6,22 @@
     <meta name="description" content="Galería de fotografía artística de Rodolfo Dueñas. Retratos, paisajes y fotografía urbana.">
     <title>Galería | Rodolfo Dueñas</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <header class="top-bar">
         <div class="logo">
-            <a href="index.html">RODOLFO DUEÑAS</a>
+            <a href="index.html">Rodolfo.</a>
         </div>
         <nav class="nav-links">
-            <a href="index.html">Inicio</a>
-            <a href="galeria.html" class="active">Galería</a>
-            <a href="sobre-mi.html">Sobre Mí</a>
+            <a href="index.html">Journal</a>
+            <a href="galeria.html" class="active">Portafolio</a>
+            <a href="sobre-mi.html">El Autor</a>
+            
+            <button id="theme-toggle" class="theme-toggle" title="Cambiar Tema">
+                <i class="fas fa-moon"></i>
+            </button>
         </nav>
     </header>
 
@@ -25,26 +30,23 @@
     </main>
 
     <div id="lightbox" class="lightbox hidden">
-        <span id="close-btn"><i class="fas fa-times"></i> &times;</span> <div class="lightbox-content-wrapper">
+        <span id="close-btn"><i class="fas fa-times"></i></span>
+        
+        <div class="lightbox-content-wrapper">
             <img id="lightbox-img" src="" alt="">
             <div id="exif-data-container"></div>
         </div>
     </div>
 
     <footer class="bottom-bar">
-        <div class="copyright">&copy; 2026 Rodolfo Dueñas Sosa</div>
+        <div class="copyright">&copy; 2026 Rodolfo Dueñas</div>
         <div class="footer-links">
-            <a href="sobre-mi.html#contacto-anchor">Ir a Contacto</a>
+            <a href="sobre-mi.html#contacto-anchor">Contacto</a>
         </div>
     </footer>
 
     <script src="data.js"></script>
     <script src="main.js"></script>
-    
-    <div id="lightbox" class="lightbox hidden">
-        <span id="close-btn">&times;</span>
-        <img id="lightbox-img" src="" alt="">
-    </div>
 
 </body>
 </html>

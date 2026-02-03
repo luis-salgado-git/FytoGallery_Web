@@ -68,3 +68,36 @@ if(lightbox) {
     });
 }
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+// --- LÓGICA MODO OSCURO / CLARO ---
+const themeToggle = document.getElementById('theme-toggle');
+const body = document.body;
+const icon = themeToggle ? themeToggle.querySelector('i') : null;
+
+// 1. Verificar si ya hay una preferencia guardada
+const currentTheme = localStorage.getItem('theme');
+
+if (currentTheme === 'dark') {
+    body.classList.add('dark-mode');
+    if(icon) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun'); // Cambiar icono a sol
+    }
+}
+
+// 2. Función al hacer clic
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        
+        // Cambiar icono y guardar preferencia
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        } else {
+            localStorage.setItem('theme', 'light');
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        }
+    });
+}
