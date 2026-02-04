@@ -1,4 +1,3 @@
-// data.js
 const portfolioData = [
     {
         id: 1,
@@ -20,6 +19,5 @@ const portfolioData = [
         alt: "Detalle Cámara",
         category: "Producto",
         exif: { camara: "Fujifilm XT-4", lente: "35mm", iso: "200", exp: "1/125s", f: "f/4" }
-    },
-    // Añade aquí más fotos...
+    }
 ];
