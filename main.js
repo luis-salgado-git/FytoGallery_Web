@@ -1,41 +1,33 @@
-// main.js - Versión Educativa
+// main.js - Código Lógico Completo
 const grid = document.getElementById('gallery-grid');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
-const exifContainer = document.getElementById('exif-data-container'); // Nuevo contenedor
+const exifContainer = document.getElementById('exif-data-container');
 const closeBtn = document.getElementById('close-btn');
 
+// 1. CARGA DE GALERÍA
 if (grid && typeof portfolioData !== 'undefined') {
     portfolioData.forEach(foto => {
         const item = document.createElement('div');
         item.classList.add('photo-item');
-        
         const img = document.createElement('img');
         img.src = foto.src;
         img.alt = foto.alt;
         img.loading = "lazy";
-
-        img.onload = () => img.classList.add('loaded');
         
-        item.addEventListener('click', () => {
-            openLightbox(foto); // Pasamos el OBJETO entero, no solo la src
-        });
-
+        img.onload = () => img.classList.add('loaded');
+        item.addEventListener('click', () => openLightbox(foto));
         item.appendChild(img);
         grid.appendChild(item);
     });
 }
 
+// 2. LIGHTBOX
 function openLightbox(foto) {
     if (!lightbox) return;
-    
     lightboxImg.src = foto.src;
     
-    // INYECTAR DATOS EXIF
-    // Si la foto tiene datos, los mostramos. Si no, ponemos "N/A"
     const info = foto.exif || { camara: "-", lente: "-", iso: "-", f: "-" };
-    
-    // Renderizamos el HTML del panel EXIF dinámicamente
     if(exifContainer) {
         exifContainer.innerHTML = `
             <div class="exif-panel">
@@ -50,7 +42,6 @@ function openLightbox(foto) {
             </div>
         `;
     }
-
     lightbox.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 }
@@ -62,42 +53,29 @@ function closeLightbox() {
 }
 
 if(closeBtn) closeBtn.addEventListener('click', closeLightbox);
-if(lightbox) {
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox || e.target.classList.contains('lightbox-content-wrapper')) closeLightbox();
-    });
-}
+if(lightbox) lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target.classList.contains('lightbox-content-wrapper')) closeLightbox();
+});
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
-// --- LÓGICA MODO OSCURO / CLARO ---
+
+// 3. MODO OSCURO
 const themeToggle = document.getElementById('theme-toggle');
-const body = document.body;
 const icon = themeToggle ? themeToggle.querySelector('i') : null;
 
-// 1. Verificar si ya hay una preferencia guardada
-const currentTheme = localStorage.getItem('theme');
-
-if (currentTheme === 'dark') {
-    body.classList.add('dark-mode');
-    if(icon) {
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun'); // Cambiar icono a sol
-    }
+// Cargar preferencia
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+    if(icon) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
 }
 
-// 2. Función al hacer clic
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        
-        // Cambiar icono y guardar preferencia
-        if (body.classList.contains('dark-mode')) {
-            localStorage.setItem('theme', 'dark');
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
-        } else {
-            localStorage.setItem('theme', 'light');
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        if(icon) {
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
         }
     });
 }
