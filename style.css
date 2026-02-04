@@ -9,7 +9,7 @@
     --text-muted: #666666;     
     --font-title: 'Playfair Display', serif;
     --font-body: 'Mulish', sans-serif;
-    --spacing-container: 50px; /* Variable para márgenes laterales */
+    --spacing-container: 50px; 
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -71,12 +71,34 @@ body {
     border-bottom: 2px solid var(--text-main);
 }
 
+/* --- BOTÓN INSTAGRAM (Visible y Grande) --- */
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main); 
+    font-size: 1.8rem !important; /* Tamaño forzado */
+    margin-left: 20px;     
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+    opacity: 0.9;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.social-btn:hover {
+    transform: scale(1.2) rotate(10deg);
+    color: #E1306C !important;
+    opacity: 1;
+    border-bottom: none !important;
+}
+
 /* =========================================
    3. PORTADA (Hero)
    ========================================= */
 .hero-editorial {
     display: grid;
-    grid-template-columns: 45% 55%; /* Ajuste para dar más aire a la foto */
+    grid-template-columns: 45% 55%; 
     min-height: 90vh;
     align-items: center;
     width: 100%;
@@ -94,7 +116,7 @@ body {
 
 .hero-title {
     font-family: var(--font-title);
-    font-size: clamp(3rem, 5vw, 5rem); /* Título escalable inteligente */
+    font-size: clamp(3rem, 5vw, 5rem); 
     line-height: 1.1;
     color: var(--text-main); margin-bottom: 30px;
 }
@@ -104,7 +126,7 @@ body {
 .cta-btn {
     display: inline-block; width: fit-content;
     padding: 15px 40px;
-    background: var(--text-main); color: white; /* Color dinámico */
+    background: var(--text-main); color: white;
     text-decoration: none; text-transform: uppercase;
     font-size: 0.8rem; letter-spacing: 2px;
     transition: all 0.3s ease;
@@ -112,28 +134,102 @@ body {
 }
 .cta-btn:hover { transform: translateY(-3px); opacity: 0.9; }
 
-/* Imagen Hero */
 .hero-image-container {
     height: 100%; width: 100%;
-    /* Asegúrate de que esta ruta sea correcta en tu carpeta */
     background-image: url('assets/fondo.png'); 
     background-size: cover; background-position: center;
     position: relative;
+    min-height: 500px;
 }
-
-/* Tarjeta Flotante "Tip del Día" */
-.tip-card {
-    position: absolute; bottom: 50px; left: -50px;
-    background: white; padding: 30px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-    max-width: 320px;
-    border-left: 3px solid var(--text-main);
-}
-.tip-title { font-family: var(--font-title); font-size: 1.2rem; margin-bottom: 10px; color: var(--text-main); }
-.tip-content { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
 
 /* =========================================
-   4. GALERÍA
+   4. SECCIÓN: JOURNAL / TIPS (GRID HORIZONTAL)
+   ========================================= */
+.journal-section {
+    padding: 80px var(--spacing-container);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section-label {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 60px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    line-height: 0.1em;
+}
+.section-label span { background: var(--bg-color); padding: 0 15px; }
+
+/* Rejilla de Tips */
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 80px;
+}
+
+.tip-card {
+    background: white;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border-top: 4px solid var(--text-main);
+    transition: transform 0.3s ease;
+    height: 100%;
+    display: flex; flex-direction: column;
+}
+
+.tip-card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+
+.tip-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.tip-number { 
+    font-family: var(--font-title); font-weight: 700; color: #eee; font-size: 3rem; line-height: 0.8;
+}
+
+.tip-title { font-family: var(--font-title); font-size: 1.4rem; color: var(--text-main); margin: 0; max-width: 80%; }
+.tip-content { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; margin-top: auto; }
+
+/* Banner Libro */
+.book-promo {
+    background-color: #1a1a1a;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.book-image {
+    height: 100%; min-height: 400px;
+    /* Usa una imagen de mockup de libro aquí */
+    background-image: url('https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80');
+    background-size: cover; background-position: center;
+}
+
+.book-content { padding: 60px; }
+.book-tag { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #888; margin-bottom: 10px; display: block; }
+.book-title { font-family: var(--font-title); font-size: 2.5rem; margin-bottom: 20px; line-height: 1.1; color: white; }
+.book-desc { color: #ccc; margin-bottom: 30px; font-size: 1rem; }
+
+.btn-buy {
+    display: inline-block; padding: 15px 30px;
+    background: white; color: black;
+    text-decoration: none; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem;
+    transition: 0.3s;
+}
+.btn-buy:hover { background: #ddd; transform: translateY(-2px); }
+
+/* =========================================
+   5. GALERÍA
    ========================================= */
 .gallery-container {
     column-count: 3; column-gap: 30px;
@@ -144,7 +240,7 @@ body {
 .photo-item {
     margin-bottom: 30px; break-inside: avoid;
     position: relative; cursor: pointer;
-    background-color: #eee; min-height: 200px; /* Skeleton loading */
+    background-color: #eee; min-height: 200px; 
 }
 
 .photo-item img {
@@ -152,13 +248,10 @@ body {
     transition: transform 0.5s ease, filter 0.5s ease;
     filter: grayscale(10%);
 }
-
-.photo-item:hover img {
-    transform: scale(1.02); filter: grayscale(0%);
-}
+.photo-item:hover img { transform: scale(1.02); filter: grayscale(0%); }
 
 /* =========================================
-   5. LIGHTBOX & EXIF
+   6. LIGHTBOX & EXIF
    ========================================= */
 .lightbox {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -200,7 +293,7 @@ body {
 }
 
 /* =========================================
-   6. PÁGINA: SOBRE MÍ
+   7. PÁGINA: SOBRE MÍ
    ========================================= */
 .about-container {
     max-width: 1000px; margin: 0 auto; padding: 60px var(--spacing-container);
@@ -222,7 +315,7 @@ body {
 }
 
 /* =========================================
-   7. MODO OSCURO
+   8. MODO OSCURO
    ========================================= */
 body.dark-mode {
     --bg-color: #121212;
@@ -231,32 +324,40 @@ body.dark-mode {
 }
 body.dark-mode .top-bar { background-color: rgba(18, 18, 18, 0.95); }
 body.dark-mode .lightbox { background: rgba(0, 0, 0, 0.95); }
-body.dark-mode .exif-panel, body.dark-mode .tip-card { background: #1E1E1E; border-color: #444; }
+body.dark-mode .exif-panel { background: #1E1E1E; border-color: #444; }
 body.dark-mode .photo-item img { filter: brightness(0.8); }
+/* Ajustes nuevos para Journal Oscuro */
+body.dark-mode .section-label span { background: #121212; }
+body.dark-mode .tip-card { background: #1E1E1E; border-top: 4px solid #444; }
+body.dark-mode .tip-number { color: #333; }
 
 .theme-toggle {
     cursor: pointer; background: none; border: none;
     font-size: 1.2rem; color: var(--text-main); transition: 0.3s;
+    padding: 5px;
 }
 .theme-toggle:hover { transform: rotate(15deg) scale(1.1); }
 
 
 /* =========================================
-   8. RESPONSIVE / MÓVIL (LA CORRECCIÓN VITAL)
+   9. RESPONSIVE / MÓVIL
    ========================================= */
 @media (max-width: 900px) {
-    :root { --spacing-container: 20px; } /* Reducimos márgenes globales */
+    :root { --spacing-container: 20px; } 
 
     /* Header Apilado */
     .top-bar { flex-direction: column; gap: 15px; padding: 15px; }
     .nav-links { gap: 20px; flex-wrap: wrap; justify-content: center; width: 100%; }
     .nav-links a { font-size: 0.8rem; }
     
+    /* Ajuste botón Instagram móvil */
+    .social-btn { margin-left: 10px; font-size: 2rem !important; }
+
     /* Portada en Columna */
     .hero-editorial { grid-template-columns: 1fr; min-height: auto; }
     .hero-image-container { 
-        order: -1; /* Foto arriba */
-        height: 50vh; /* Altura controlada */
+        order: -1; 
+        height: 50vh; 
         width: 100%;
     }
     .hero-text { 
@@ -266,13 +367,13 @@ body.dark-mode .photo-item img { filter: brightness(0.8); }
     }
     .hero-title { margin-bottom: 20px; }
     
-    /* Tarjeta Tip Ajustada */
-    .tip-card {
-        position: relative; /* Ya no flota fuera */
-        left: 0; bottom: 0;
-        width: 90%; margin: -40px auto 0 auto; /* Sube un poco sobre la foto */
-        padding: 20px;
-    }
+    /* Journal en columna */
+    .tips-grid { grid-template-columns: 1fr; gap: 40px; }
+    
+    /* Libro en columna */
+    .book-promo { grid-template-columns: 1fr; }
+    .book-image { height: 300px; min-height: auto; }
+    .book-content { padding: 40px 20px; text-align: center; }
     
     /* Galería */
     .gallery-container { column-count: 1; padding: 30px 20px; }
