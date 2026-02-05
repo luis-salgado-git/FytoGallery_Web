@@ -71,7 +71,7 @@ body {
     align-items: center;
     justify-content: center;
     color: var(--text-main); 
-    font-size: 1.8rem !important; 
+    font-size: 1.3rem !important; 
     margin-left: 20px;     
     text-decoration: none !important;
     transition: all 0.3s ease;
@@ -89,9 +89,11 @@ body {
 
 /* Hero Section */
 .hero-editorial {
+    backdrop-filter: blur(100px);
     display: grid;
-    grid-template-columns: 45% 55%; 
-    min-height: 90vh;
+    grid-template-columns: 35% 65%; 
+    height: 75.5vh;
+    min-height: 300px;
     align-items: center;
     width: 100%;
 }
@@ -134,7 +136,7 @@ body {
     min-height: 500px;
 }
 
-/* Journal & Tips */
+/* Tips */
 .journal-section {
     padding: 80px var(--spacing-container);
     max-width: 1400px;
@@ -338,6 +340,7 @@ body.dark-mode .tip-card { background: #1E1E1E; border-top: 4px solid #444; }
 body.dark-mode .tip-number { color: #333; }
 body.dark-mode .btn-print { background-color: #E0E0E0; color: #121212; border-color: #E0E0E0; }
 body.dark-mode .btn-print:hover { background-color: transparent; color: #E0E0E0; }
+body.dark-mode .cta-btn { color: var(--bg-color)}
 
 .theme-toggle {
     cursor: pointer; background: none; border: none;
@@ -354,7 +357,7 @@ body.dark-mode .btn-print:hover { background-color: transparent; color: #E0E0E0;
     .nav-links { gap: 20px; flex-wrap: wrap; justify-content: center; width: 100%; }
     .nav-links a { font-size: 0.8rem; }
     
-    .social-btn { margin-left: 10px; font-size: 2rem !important; }
+    .social-btn { margin-left: 10px; font-size: 1.9rem !important; }
 
     .hero-editorial { grid-template-columns: 1fr; min-height: auto; }
     .hero-image-container { 
