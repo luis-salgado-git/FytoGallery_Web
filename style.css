@@ -357,9 +357,21 @@ body.dark-mode .cta-btn { color: var(--bg-color)}
     .nav-links { gap: 20px; flex-wrap: wrap; justify-content: center; width: 100%; }
     .nav-links a { font-size: 0.8rem; }
     
-    .social-btn { margin-left: 10px; font-size: 1.9rem !important; }
+    .social-btn { margin-left: 10px; font-size: 1.3rem !important; }
+    
+    .hero-title { 
+        font-size: 3rem; 
+        margin-bottom: 20px;
+    }
+    .hero-editorial { 
+        grid-template-columns: 1fr; 
+        
 
-    .hero-editorial { grid-template-columns: 1fr; min-height: auto; }
+        height: auto; 
+        min-height: 100vh;
+        
+        padding-bottom: 50px;
+    }
     .hero-image-container { 
         order: -1; 
         height: 50vh; 
@@ -384,7 +396,7 @@ body.dark-mode .cta-btn { color: var(--bg-color)}
     .bio-text { text-align: center; }
     .contact-list { justify-content: center; display: inline-block; text-align: left; }
     
-    .lightbox-content-wrapper { flex-direction: column; width: 95%; max-height: 95vh; overflow-y: auto; }
+    .lightbox-content-wrapper { flex-direction: column; width: 95%; max-height: 95vh; overflow-y: auto; align-items: center;}
     .lightbox img { max-width: 100%; max-height: 50vh; margin-bottom: 20px; }
     .exif-panel { width: 100%; border-left: none; border-top: 4px solid var(--text-main); }
     #close-btn { top: 15px; right: 20px; font-size: 1.8rem; background: rgba(255,255,255,0.8); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
